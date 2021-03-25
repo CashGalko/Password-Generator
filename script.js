@@ -10,11 +10,12 @@ var specialChar = "!@#$%^&*()".split("");
 
 // Empty array for final password (allows concat)
 
-var finalPassword = [];
+
 
 // Function needed to generate the password
 
 function generatePassword() {
+  var finalPassword = [];
   // Confirm password length
   var passwordLength = prompt("Enter a value for your password's length (Must be between 8 & 128).");
   // Error message for incorrect password length
@@ -23,6 +24,7 @@ function generatePassword() {
     // Runs the function again to allow them to enter a new value. 
     generatePassword();
   };
+ 
 
   // If they enter a correct value,
   // define variables that coinside with their respective global arrays
@@ -32,19 +34,36 @@ function generatePassword() {
   var addSpecial = confirm("Include special characters in your password?"); 
 
   // Add an if statement that concats all of the arrays to generate final password.
+  
   if (addLower){
-    finalPassword.concat(lowerCase);
+    finalPassword = finalPassword.concat(lowerCase);
   }
   if (addUpper){
-    finalPassword.concat(upperCase);
+    finalPassword = finalPassword.concat(upperCase);
   }
   if (addNumeric){
-    finalPassword.concat(numeric);
+    finalPassword = finalPassword.concat(numeric);
   }
   if (addSpecial){
-    finalPassword.concat(specialChar);
+    finalPassword = finalPassword.concat(specialChar);
+  }
+  else{
+    alert("Then why are you using this program :)");
+    generatePassword();
   }
 
+  console.log(finalPassword)
+  
+  var blankPass = ""
+  for (var i = 0; i < passwordLength; i++) { 
+    var index = Math.floor(Math.random() * finalPassword.length);
+    blankPass = blankPass + finalPassword[index]
+    
+
+  }
+
+  console.log(blankPass);
+  return blankPass
 }
 
 // Write password to the #password input
@@ -53,6 +72,7 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
+
 
 }
 
